@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="E:/web_前端/vue_study/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{name + '你好'}}</div>
+        <!-- 另外一种模板语法 也可以显示内容 但是不能读传HTML代码 还可以加data-->
+        <div v-text="'name' + ' 你好'"></div>
+        <!-- 另外一种模板语法 也可以显示内容 但是能读传HTML代码 -->
+        <div v-html="'name' + ' 你好'"></div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'hello'
+            }
+        })
+    </script>
+</body>
+</html>

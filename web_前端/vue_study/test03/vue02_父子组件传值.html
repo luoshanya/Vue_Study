@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 父向子传值 通过标签属性传值 -->
+        <counter :count='0' @change='handleIncrease'></counter>
+        <counter :count='0' @change='handleIncrease'></counter>
+        <div @click="handleChange">{{num}}</div>
+    </div>
+    <script>
+        var counter = {
+            //接父传值使用 props 是数组类型
+            props: ['count'],
+            //父组件传的值子组件不可以直接修改，需要克隆一份新的数据 然后使用克隆的数据进行点击事件
+            data: function(){
+                return{
+                    number: this.count
+                }
+            },
+            template: '<div @click="handleClick">{{number}}</div>',
+            methods: {
+                handleClick: function(){
+                    this.number = this.number + 2;
+                    // 这个change还可以添加步长
+                    this.$emit('change', 2)
+                }
+            },
+        }
+        
+        var vm = new Vue({
+            el: "#root",
+            data:{
+                num: 0
+            },
+            //父组件调用子组件用comlonents
+            components: {
+                counter: counter,
+            },
+            methods:{
+                //使用$emit('change', 2) 其中2就是步长step
+                handleIncrease: function(step){
+                    this.num += step
+                },
+                handleChange: function(){
+                    alert('change')
+                },
+            }
+        })
+    </script>
+</body>
+</html>

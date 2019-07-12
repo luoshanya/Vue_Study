@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 原生点击事件 在@click后面加native 不用接收子组件的点击信号 -->
+        <child  @click.native='handleClick1'>
+
+        </child>
+    </div>
+    <script>
+        //定义一个全局组件
+        Vue.component('child', {
+            // template: "<div @click='handleClick'>child</div>",
+            // methods: {
+            //     handleClick: function(){
+            //         //向外部说明已经点击
+            //         this.$emit('click')
+            //     }
+            template: "<div>cbugc</div>"
+        })
+
+        var vm = new Vue({
+            el: "#root",
+            methods: {
+                handleClick1: function(){
+                    //收到点击事件后，才能进行这一步操作
+                    alert('clicka')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

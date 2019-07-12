@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 循环使用v-for 然后item in list-->
+        <!-- <div v-for="(item, index) in list"
+            :key="item.id">{{item.text}}----{{index}}</div> -->
+        <template>
+                <div v-for="(item, index) in list"
+                :key="item.id">
+                <div>
+                    {{item.text}}----{{index}}
+                </div>
+                <span>{{item}}</span>
+            </div>
+        </template>
+    </div>
+    <script>
+        // Vue.set(vm.list,1,{'id':'545', 'text':'45454'}) 改变值
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list:[
+                    //数组里面加{}
+                    {
+                        id: '6465464cc',
+                        text: 'hello'
+                    },
+                    {
+                        id: '6465464sec',
+                        text: 'world'
+                    },
+                    {
+                        id: '6465464',
+                        text: 'zhu'
+                    },
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

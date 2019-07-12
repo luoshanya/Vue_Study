@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id='root'>
+        <child content="Dell"></child>
+        <child content="Lee"></child>
+    </div>
+    <script>
+        //给vue实例添加一个属性
+        Vue.prototype.bus = new Vue()
+
+        Vue.component('child', {
+            data: function(){
+                return{
+                    selfcontent: this.content
+                }
+            },
+            props:{
+                content: String
+            },
+            template: '<div @click="handleClick">{{selfcontent}}</div>',
+            methods: {
+                handleClick: function(){
+                    this.bus.$emit('change', this.selfcontent)
+                }
+            },
+            mounted: function() {
+                //需要创建新的参数
+                var this_ = this
+                this.bus.$on('change', function(msg){
+                    // 因为操作父传值得原因 所以需要替换this
+                    this_.selfcontent = msg
+                })
+            },
+        })
+
+        var vm = new Vue({
+            el: "#root",
+        })
+    </script>
+</body>
+</html>

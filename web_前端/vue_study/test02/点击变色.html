@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+    <style>
+        .activated{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <!-- class对象绑定 :class="{activated: isActivated}-->
+        <!-- <div @click='handleDivClick' :class="{activated: isActivated}"> -->
+        
+            <!-- 或者这个语法也行 改变样式 class内容可以是列表[]，这样就有几种样式了-->
+        <div @click='handleDivClick' :class="{activated}">
+            {{message}}
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message: 'hello word',
+                // isActivated: false,
+                activated: '',
+            },
+            // methods: {
+            //     handleDivClick: function(){
+            //         this.isActivated = !this.isActivated;
+            //     }
+            // },
+
+            methods: {
+                handleDivClick: function(){
+                    if (this.activated === 'activated'){
+                        this.activated = ''
+                    }else{
+                        this.activated = 'activated'
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

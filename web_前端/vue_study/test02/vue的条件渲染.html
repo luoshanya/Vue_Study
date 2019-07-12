@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用v-if会使d其对象删除掉 还可以给show赋值-->
+        <!-- <div v-if="show === 'a'">{{message}}</div> -->
+        <!-- 需要if和else需要连在一起写 不然会出错 -->
+        <!-- <div v-else-if="show === 'b'"> -->
+            <!-- this is b -->
+        <!-- </div> -->
+        <!-- <div v-else>bye world</div> -->
+        <!-- 使用v-show的性能更好些 因为不需要删除html里面的div -->
+        <!-- <div v-show="show">{{message}}</div> -->
+
+        <div v-if="show">
+            账号：<input type="text" key="username">
+        </div>
+        <div v-else>
+            <!-- -->
+            邮箱：<input type="text" key="email">
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message: "hello world",
+                show: true,
+            }
+        })
+    </script>
+</body>
+</html>

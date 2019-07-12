@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'>
+    </script>
+</head>
+<body>
+    <div id="root">
+        <div @click="handleClick">{{message}}</div>
+        <item></item>
+    </div>
+    <script>
+        // 创建一个div标签
+        Vue.component('item', {
+            template: '<div> hello item</div>'
+        })
+        //创建实例
+        var vm = new Vue({
+            // 父标签
+            el: "#root",
+            data: {
+                message: 'hello world'
+            },
+            methods: {
+                handleClick: function(){
+                    alert('hello')
+                }
+            },
+        })
+    </script>
+</body>
+</html>

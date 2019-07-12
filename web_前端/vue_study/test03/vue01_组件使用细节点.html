@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 使用组件
+        <table>
+            <tbody>
+              以后遇到不兼容的row标签 就使用is属性，这样就代表是row组件 且不会报错 table里面使用的
+                <tr is='row'></tr>
+                <tr is='row'></tr>
+                <tr is='row'></tr>
+            </tbody>
+        </table> -->
+
+        <!-- 计算标签点击的总和 -->
+        <!-- <div ref="hello" @click='handleClick'> -->
+        <div ref="hello">
+            {{message}}
+            <counter ref="reference" @change="handleChange"></counter>
+            <counter ref="reference1" @change="handleChange"></counter>
+            <!-- 不能使用上面的标签 不然不显示 -->
+            <div>{{count}}</div>
+        </div>
+        <!-- 这里就是下面子组件添加的标签 -->
+    </div>
+    <script>
+        // 父子组件发生数据改变的处理方法
+
+        // 这里要写row is里面的内容 子组件
+        // Vue.component('row', {
+        //     // 这里如果需要写data 那么就必须写function函数 不写的话内容不会显示
+        //     data: function() {
+        //         return {
+        //             content: 'this is content'
+        //         }
+        //     },
+        //     template: '<tr><td>{{content}}</td></tr>'
+        // })
+        // var vm = new Vue({
+        //     el: "#root"
+        // })
+         
+        //现在遇到添加标签div的时候才用到   子
+        Vue.component('counter', {
+            //添加标签的时候用的 template
+            template: '<div @click="handleClick1">{{msg}}</div>',
+            data: function(){
+                return{
+                    //传参的数据
+                    msg: 0,
+                }
+            },
+            methods:{
+                handleClick1: function(){
+                    this.msg ++;
+                    //告诉外面，我已经发生了改变
+                    this.$emit('change')
+                }
+            }
+        })
+        // 父
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                message: '你好！',
+                count: 0
+            },
+            methods: {
+                // handleClick: function(){
+                //     console.log(this.$refs.hello);
+                //     // 转换HTML页面的方法 innerHTML
+                //     console.log(this.$refs.hello.innerHTML);
+                // },
+                handleChange: function(){
+                    //但是需要计算总数时可用ref属性
+                    console.log(this.$refs.reference.msg )
+                    this.count = this.$refs.reference.msg + this.$refs.reference1.msg
+                    console.log(this.count)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

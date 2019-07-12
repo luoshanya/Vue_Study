@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="E:/web_前端/vue_study/vue.js">
+    </script>
+</head>
+<body>
+    <div id='app'>
+        <!-- 事件双向保存 -->
+        <input type="text" v-model="inputValue">
+        <!-- 绑定 事件-->
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+            <!-- li标签
+            <li>第一节课的内容</li>
+            <li>第二节课的内容</li> -->
+            <!-- 可遍历ul里面的li中的内容 -->
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        // MVVM编程格式
+        var app = new Vue({
+            el: '#app',
+            data: {
+                list:[],
+                inputValue: ''
+            },
+            // 点击事件的方法
+            methods: {
+                handleBtnClick: function(){
+                    this.list.push(this.inputValue)
+                    // alert(this.inputValue)
+                    this.inputValue = ''
+                }
+            },
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id='root'>
+        <body-content>
+            <template slot-scope="props">
+                <h1>{{props.item}}</h1>
+            </template>
+        </body-content>
+        
+    </div>
+    <script>
+        Vue.component('body-content', {
+            data: function(){
+                return{
+                    list: [1,2,3,4]
+                }
+            },
+            template: `<div>
+                        <ul>
+                            <slot v-for="item of list" :item=item></slot>
+                        </ul>
+                        </div>`,
+                        
+        })
+
+        var vm = new Vue({
+            el: "#root"
+        })
+    </script>
+</body>
+</html>

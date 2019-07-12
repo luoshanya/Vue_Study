@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id='root'>
+        <!-- 对父参数的校验 -->
+        <child content="bcavgech"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props:{
+                //参数校验 是否为string 和number
+                // content: [String, Number]
+                content:{
+                    // type: String,
+                    //条件 标签必须写content 不写会出警告  Missing required prop: "content"
+                    // required: true,
+                    //设定默认 下面为true 上面又不写content的情况下 就使用下面这个默认值 不过依然会出现require警告
+                    // default: "default value"
+
+                    //对参数进行校验， 形参 判断是否满足大小
+                    validator: function(value){
+                        return(value.length > 5)
+                    }
+                }
+            },
+            template:"<div>{{content}}</div>"
+        })
+        var vm = new Vue({
+            el: "#root"
+        })
+    </script>
+</body>
+</html>

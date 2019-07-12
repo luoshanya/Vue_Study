@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="E:/web_前端/vue_study/vue.js">
+    </script>
+</head>
+<body>
+    <div id='app'>
+        <!-- 事件双向绑定 -->
+        <input type="text" v-model="inputValue">
+        <!-- 绑定 事件-->
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+            <!-- li标签
+            <li>第一节课的内容</li>
+            <li>第二节课的内容</li> -->
+            <!-- 可遍历ul里面的li中的内容 -->
+            <!-- <li v-for="item in list">{{item}}</li> -->
+
+            <!-- 组件化 绑定item 将content内容放进li item里面   删除还需要在标签上写delete 监听事件的发生-->
+            <!-- 可以见v-bind删掉 代码简洁 -->
+            <todo-item :content="item" @delete="handleItemClick" :index="index" v-for="(item, index) in list">
+
+            </todo-item>
+        </ul>
+    </div>
+    <script>
+
+        //点击事件方法 点击删除
+        var TodoItem = {
+            props: ['content', 'index'],
+            //v-on:click 简写@click
+            template: "<li @click='handleItemClick'>{{content}}</li>",
+            methods:{
+                handleItemClick:function(){
+                    //使用父传值进行进行删除功能
+                    this.$emit("delete", this.index)
+                }
+            }
+        }
+
+        // 全局组件使用 
+        // Vue.component("TodoItem", {
+        //     props: ['content'],
+        //     // 传值 使用这个方法
+        //     template: "<li>{{content}}</li>"
+        // })
+        
+        //局部组件使用
+        // var TodoItem = {
+        //     props: ['content'],
+        //     template: "<li>{{content}}</li>"
+        // }
+        var app = new Vue({
+            el: '#app',
+            // 引用局部组件 使用对象的方法
+            components: {
+                TodoItem: TodoItem
+            },
+            data: {
+                list:[],
+                inputValue: ''
+            },
+            // 点击事件的方法
+            methods: {
+                handleBtnClick: function(){
+                    this.list.push(this.inputValue)
+                    // alert(this.inputValue)
+                    this.inputValue = ''
+                },
+                //方法都在里面写
+                handleItemClick: function(index){
+                    //清空数据
+                    // this.list = []
+                    // alert(index)
+                    //删除某一条数据 删除范围 0,1
+                    this.list.splice(index, 1)
+                }
+            }
+            
+        })
+    </script>
+</body>
+</html>

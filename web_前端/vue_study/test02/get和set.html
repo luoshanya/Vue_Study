@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='E:/web_前端/vue_study/vue.js'></script>
+</head>
+<body>
+    <div id='app'>
+        {{FullName}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: 'hello',
+                sconedname: 'world'
+            },
+            computed: {
+                FullName: {
+                    get: function(){
+                    return this.firstname + ' ' + this.sconedname
+                } ,
+                //修改才会发生改变的set 才会调用此方法
+                set: function(value){
+                    var array = value.split(' ');
+                    this.firstname = array[0];
+                    this.sconedname = array[1];
+                    console.log(value);
+                }
+                }
+            },
+        })
+    </script>
+</body>
+</html>
